@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { LayoutBase } from 'layouts';
 import { routes } from '../tree';
-import { fetchUsersStarted } from 'store/app/actions';
+import { fetchUsersStarted, openChoicedView } from 'store/app/actions';
 
 const View = React.memo(() => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchUsersStarted());
+		dispatch(openChoicedView());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

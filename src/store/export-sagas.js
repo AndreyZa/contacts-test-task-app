@@ -1,9 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { fetchUsersStarted, fetchUsersSuccessfully, openChoicedView } from './app/actions';
-import { getUsers } from 'services';
+import { fetchUsersStarted, fetchUsersSuccessfully, openChoicedView, choicedViewOpened } from './app/actions';
+import { getUsers, getContactsView } from 'services';
 
 function* contactsSaga() {
 	yield takeLatest(fetchUsersStarted.type, fetchUsersStartedSaga);
+	yield takeLatest(openChoicedView.type, openChoicedViewSaga);
 }
 
 function* fetchUsersStartedSaga() {
@@ -17,6 +18,11 @@ function* fetchUsersStartedSaga() {
 		// todo FAILED ACTION
 		console.log("FAILED getUsers", e);
 	}
+}
+
+function* openChoicedViewSaga() {
+	const view = yield getContactsView();
+	yield put(choicedViewOpened(view));
 }
 
 export {
