@@ -1,1 +1,1 @@
-export {}
+export { getUsers } from './users-server';

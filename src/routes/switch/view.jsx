@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { LayoutBase } from 'layouts';
 import { routes } from '../tree';
+import { fetchUsersStarted } from 'store/app/actions';
 
 const View = React.memo(() => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchUsersStarted());
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<Switch>
 			{Object.keys(routes).map((key) => {
