@@ -2,7 +2,9 @@
 import { connect } from 'react-redux';
 import { View } from './view';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+	size: state.app.size,
+});
 
 const mapDispatchToProps = {};
 

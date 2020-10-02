@@ -6,6 +6,7 @@ import { routes } from 'routes';
 const View = () => {
 	const navbarRoutes = useMemo(() => [
 		{ name: 'Home', key: 'home' },
+		{ name: 'Contacts', key: 'contacts' },
 	], []);
 
 	return (
