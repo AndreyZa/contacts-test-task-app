@@ -4,6 +4,7 @@ import { View } from './view';
 
 const mapStateToProps = (state) => ({
 	size: state.app.size,
+	tableView: state.app.tableView,
 });
 
 const mapDispatchToProps = {};

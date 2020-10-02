@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
 import { View } from './view';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+	contacts: state.app.contacts,
+});
 
 const mapDispatchToProps = {};
 

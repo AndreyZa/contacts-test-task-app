@@ -8,7 +8,7 @@ import {
 import { saveChoicedContactsView } from 'services/contacts-view-service';
 
 export const initialState = {
-	users: [],
+	contacts: [],
 	tableView: true,
 	error: null,
 	size: 0,
@@ -29,7 +29,7 @@ export const reducer = createReducer(initialState, {
 	[fetchedUsersSuccessfully.type]: function (state, action) {
 		return {
 			...state,
-			users: action.payload,
+			contacts: action.payload,
 			error: null,
 		};
 	},

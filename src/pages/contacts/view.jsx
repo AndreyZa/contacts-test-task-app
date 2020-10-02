@@ -4,7 +4,7 @@ import { fetchUsersStarted, openChoicedView } from 'store/app/actions';
 import { randomIntegerInRange } from 'utils';
 import { SwitcherContactsView, ContactsTableView, ContactsBlockView } from 'components';
 
-const View = ({ size }) => {
+const View = ({ size, tableView }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -17,8 +17,7 @@ const View = ({ size }) => {
 	return (
 		<div className={'page page--contacts'}>
 			<SwitcherContactsView />
-			<ContactsTableView />
-			<ContactsBlockView />
+			{tableView ? <ContactsTableView /> : <ContactsBlockView />}
 		</div>
 	);
 };

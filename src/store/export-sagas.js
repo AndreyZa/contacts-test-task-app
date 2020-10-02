@@ -15,6 +15,7 @@ function* fetchUsersStartedSaga(fetchUsersStartedAction) {
 			yield put(fetchedUsersSuccessfully(users.results));
 		}
 	} catch (e) {
+		// todo error alert
 		yield put(fetchUsersFailed(e.message));
 	}
 }
