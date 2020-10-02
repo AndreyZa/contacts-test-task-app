@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
-import { Table } from 'antd';
+import { Table, Row, Col, Card, Statistic } from 'antd';
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 
 const View = ({ contacts }) => {
-	console.log("ccc", contacts);
-
-	const [nameFilters, natFilters] = useMemo(() => {
+	const [nameFilters, natFilters, males, females, it] = useMemo(() => {
 
 		const nameFilters = contacts.map(({ name }) => {
 			const fullName = `${name.first} ${name.last}`;
@@ -14,6 +13,9 @@ const View = ({ contacts }) => {
 			};
 		});
 
+		const allMales = contacts.filter(({ gender }) => gender === 'male').length;
+		const allFemales = contacts.filter(({ gender }) => gender === 'female').length;
+		const withOutGender = contacts.filter(({ gender }) => gender !== 'male' && gender !== 'female').length;
 
 		const nationalities = [];
 		contacts.forEach(({ nat }) => {
@@ -26,7 +28,7 @@ const View = ({ contacts }) => {
 			}
 		});
 
-		return [nameFilters, nationalities];
+		return [nameFilters, nationalities, allMales, allFemales, withOutGender];
 	}, [contacts]);
 
 	const columns = [
@@ -127,6 +129,64 @@ const View = ({ contacts }) => {
 	return (
 		<div className="contacts-table-view">ContactsTable;
 			<Table dataSource={contacts.map(toColumnsFormatCallback)}  columns={columns} />
+			<Row>
+				<Col>
+					<Card>
+						<Statistic
+							title="All"
+							value={contacts.length}
+							suffix=" users"
+						/>
+					</Card>
+				</Col>
+				<Col>
+					<Card>
+						<Statistic
+							title="Male"
+							value={males}
+							valueStyle={{ color: males > females ? '#3f8600' : '#cf1322'}}
+							prefix={ males > females ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+							suffix=" mens"
+						/>
+					</Card>
+				</Col>
+				<Col>
+					<Card>
+						<Statistic
+							title="Female"
+							value={females}
+							valueStyle={{ color: males < females ? '#3f8600' : '#cf1322'}}
+							prefix={males < females ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+							suffix=" womans"
+						/>
+					</Card>
+				</Col>
+				<Col>
+					<Card>
+						<Statistic
+							title="Users who did not choice gender"
+							value={it}
+							suffix=" without gender"
+						/>
+					</Card>
+				</Col>
+			</Row>
+			<Row style={{ marginTop: 20, }}>
+				{natFilters.map(({ value }) => {
+					const natValue = contacts.filter(({ nat }) => nat === value).length;
+					return (
+						<Col style={{ marginTop: 10 }}>
+							<Card>
+								<Statistic
+									title={value}
+									value={natValue}
+									suffix={` ${value} users`}
+								/>
+							</Card>
+						</Col>
+					);
+				})}
+			</Row>
 		</div>
 	);
 };
