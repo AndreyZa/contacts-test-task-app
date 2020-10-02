@@ -1,0 +1,1 @@
+export { SwitcherContactsView } from './container';
