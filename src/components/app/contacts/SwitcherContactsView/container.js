@@ -4,6 +4,7 @@ import { choicedViewOpened } from 'store/app/actions';
 
 const mapStateToProps = (state) => ({
 	tableView: state.app.tableView,
+	size: state.app.size,
 });
 
 const mapDispatchToProps = {

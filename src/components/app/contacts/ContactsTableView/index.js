@@ -1,0 +1,1 @@
+export { ContactsTableView } from './container';

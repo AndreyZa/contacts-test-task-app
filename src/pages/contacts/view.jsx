@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchUsersStarted, openChoicedView } from 'store/app/actions';
 import { randomIntegerInRange } from 'utils';
-import { SwitcherContactsView } from 'components';
+import { SwitcherContactsView, ContactsTableView, ContactsBlockView } from 'components';
 
 const View = ({ size }) => {
 	const dispatch = useDispatch();
@@ -14,7 +14,13 @@ const View = ({ size }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return (<div className={'page page--contacts'}><SwitcherContactsView /></div>);
+	return (
+		<div className={'page page--contacts'}>
+			<SwitcherContactsView />
+			<ContactsTableView />
+			<ContactsBlockView />
+		</div>
+	);
 };
 
 export { View };
