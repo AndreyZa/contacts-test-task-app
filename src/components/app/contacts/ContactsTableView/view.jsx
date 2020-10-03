@@ -1,6 +1,8 @@
+import './style.scss';
 import React, { useMemo } from 'react';
 import { Table, Row, Col, Card, Statistic } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
+import { simplContact } from 'utils';
 
 const View = ({ contacts }) => {
 	const [nameFilters, natFilters, males, females, it] = useMemo(() => {
@@ -105,32 +107,11 @@ const View = ({ contacts }) => {
 		},
 	];
 
-	const toColumnsFormatCallback = ({ name, dob, nat, email, phone, location, gender }, index) => {
-
-		const { country, street, city, state, postcode } = location;
-		const birthDate = new Date(dob.date);
-		const birth = `${birthDate.getMonth() + 1}/${birthDate.getDate()}/${birthDate.getFullYear()}`;
-
-		const address = `${country}, ${street.number} ${street.name} - ${city}, ${state}, ${postcode}`;
-
-		return {
-			key: String(index),
-			name: `${name.first} ${name.last}`,
-			age: dob.age,
-			birth,
-			nat,
-			email,
-			phone,
-			address,
-			gender,
-		}
-	};
-
 	return (
-		<div className="contacts-table-view">ContactsTable;
-			<Table dataSource={contacts.map(toColumnsFormatCallback)}  columns={columns} />
+		<div className="contacts-table-view">
+			<Table dataSource={contacts.map(simplContact)}  columns={columns} className="contacts-table" />
 			<Row>
-				<Col>
+				<Col key={Math.random()}>
 					<Card>
 						<Statistic
 							title="All"
@@ -139,7 +120,7 @@ const View = ({ contacts }) => {
 						/>
 					</Card>
 				</Col>
-				<Col>
+				<Col key={Math.random()}>
 					<Card>
 						<Statistic
 							title="Male"
@@ -150,7 +131,7 @@ const View = ({ contacts }) => {
 						/>
 					</Card>
 				</Col>
-				<Col>
+				<Col key={Math.random()}>
 					<Card>
 						<Statistic
 							title="Female"
@@ -161,7 +142,7 @@ const View = ({ contacts }) => {
 						/>
 					</Card>
 				</Col>
-				<Col>
+				<Col key={Math.random()}>
 					<Card>
 						<Statistic
 							title="Users who did not choice gender"
@@ -172,10 +153,10 @@ const View = ({ contacts }) => {
 				</Col>
 			</Row>
 			<Row style={{ marginTop: 20, }}>
-				{natFilters.map(({ value }) => {
+				{natFilters.map(({ value }, index) => {
 					const natValue = contacts.filter(({ nat }) => nat === value).length;
 					return (
-						<Col style={{ marginTop: 10 }}>
+						<Col style={{ marginTop: 10 }} key={Math.random() + index}>
 							<Card>
 								<Statistic
 									title={value}

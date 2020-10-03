@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { message } from 'antd';
 import { fetchUsersStarted, openChoicedView } from 'store/app/actions';
 import { randomIntegerInRange } from 'utils';
 import { SwitcherContactsView, ContactsTableView, ContactsBlockView } from 'components';
 
-const View = ({ size, tableView }) => {
+const View = ({ size, tableView, error }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -13,6 +14,12 @@ const View = ({ size, tableView }) => {
 		dispatch(openChoicedView());
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		if (error) {
+			message.error(error);
+		}
+	}, [error]);
 
 	return (
 		<div className={'page page--contacts'}>

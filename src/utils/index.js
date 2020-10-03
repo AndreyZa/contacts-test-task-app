@@ -6,3 +6,4 @@ export {
 	randomIntegerInRange,
 } from './random';
 export { redirect } from './redirect';
+export { simplContact } from './simplContact';
